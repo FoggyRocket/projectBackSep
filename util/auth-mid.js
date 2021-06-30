@@ -35,9 +35,10 @@ exports.veryToken = (req,res,next) => {
         User.findById(decoded.id)
             .then(user => {
                 req.user = user
+                next()
             })
 
-            next()
+           
 
     });
 

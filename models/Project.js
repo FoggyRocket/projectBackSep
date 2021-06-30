@@ -13,16 +13,27 @@ const projectSchema = new Schema({
         type:String,
         enum:["Module 1", "Module 2", "Module 3"]
     },
-    slideURL:String,
-    gitURL:String,
-    pageURL:String,
+    slideURL:{
+        type:String,
+        default:''
+    },
+    gitURL:{
+        type:String,
+        default:''
+    },
+    pageURL:{
+        type:String,
+        default:''
+    },
     _owner:{
         type:Schema.Types.ObjectId,
-        ref:'User'
+        ref:'User',
+        required:[true,"Debes agrega un usuario"]
     },
     _course:{
         type:Schema.Types.ObjectId,
-        ref:'Course'
+        ref:'Course',
+        required:[true,"Debes agrega un curso"]
     }
 
 },{timestamps:true})
