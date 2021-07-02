@@ -16,28 +16,32 @@ const { checkRole, veryToken } = require("../util/auth-mid");
 
 // Listing All Course by Campus
         // www.dylanejemplo.com/api/course/hauishdsadisausduisad
-router.get('/:campus',(req,res)=>{
-    const { campus } = req.params
-    Course.find({ _campus:campus })
-        .then(courses => {
-            res.status(200).json({result:courses})
-        })
-        .catch(error=>res.status(400).json({ error }))
-})
+
 
 
 // buscar un por id 
-router.get('/detailCourse/:course_id',()=>{
+router.get('/detailCourse/:course_id',(req,res)=>{
     const { course_id  } = req.params
+    console.log("params",req.params)
 
     //Populate!!!
     Course.findById(course_id)
+        .populate("_students", "name _id email") //<-- .populate("llave_a_popular", "valores_que_quieran")
         .then(course => {
             res.status(200).json({result:course})
         })
         .catch(error=>res.status(400).json({ error }))
 })
 
+router.get('/:campus',(req,res)=>{
+    const { campus } = req.params
+    console.log("params",req.params)
+    Course.find({ _campus:campus })
+        .then(courses => {
+            res.status(200).json({result:courses})
+        })
+        .catch(error=>res.status(400).json({ error }))
+})
 // creeamos
 router.post('/', veryToken, checkRole(['ADMIN']),(req,res)=>{
 
