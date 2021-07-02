@@ -9,7 +9,7 @@ const cors = require("cors")
 
 
 //Agregamos la conexion  de mongoose  
-mongoose.connect(process.env.DB,{
+mongoose.connect(process.env.DB_PROD,{
     useUnifiedTopology:true
 })
 .then((x)=>{
@@ -43,9 +43,18 @@ app.use(express.static(path.join(__dirname, 'public')));
 //por practica le  agregamos prefijo api
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const campusRouter = require('./routes/campus');
+const projectRouter = require('./routes/project');
+const courseRouter = require('./routes/course')
+
 
 app.use('/api', indexRouter);
 app.use('/api/users', usersRouter);
+app.use('/api/auth',authRouter);
+app.use('/api/campus',campusRouter);
+app.use('/api/project',projectRouter);
+app.use('/api/course',courseRouter);
 //app.use('/api/proucts',producRouter)
 
 //una ueva ruta que tome por  defecto cuando refresquemo
