@@ -43,6 +43,18 @@ router.patch('/updateProject/:project_id',veryToken,checkRole(['USER']),(req,res
      
 })
 
+
+router.get("/myProjects", veryToken , checkRole(["USER"]), (res,req)=>{
+    const {_id :_owner} = req.user
+  
+    Project.find({_owner})
+    .then( projects =>{
+      res.status(200).json({result:projects})
+    })
+    .catch( error => res.status(400).json( {error} ) )
+  
+  })
+
 //listar proyectos por  curso
 router.get('/:course_id',(req,res)=>{
     const {course_id} = req.params
