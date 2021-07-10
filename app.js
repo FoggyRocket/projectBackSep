@@ -58,5 +58,8 @@ app.use('/api/course',courseRouter);
 //app.use('/api/proucts',producRouter)
 
 //una ueva ruta que tome por  defecto cuando refresquemo
+app.use('*', (req,res)=>{
+    res.sendFile(path.join(__dirname,"public","index.html"))
+})
 
 module.exports = app;
