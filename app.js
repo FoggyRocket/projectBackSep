@@ -26,7 +26,7 @@ const app = express();
 
 app.use(
         cors({
-            origin:["http:localhost:3000","https://www.paginaDeploy.com"],
+            origin:["http:localhost:3000","https://ironprojects.herokuapp.com"],
             credentials:true
         })
     );
